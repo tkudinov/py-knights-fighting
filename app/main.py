@@ -97,8 +97,8 @@ def battle(knights_config: dict) -> dict:
     red_knight = Knight(knights_config["red_knight"])
 
     # 1 Lancelot vs Mordred:
-    lancelot.hp -= mordred.power - lancelot.protection
-    mordred.hp -= lancelot.power - mordred.protection
+    lancelot.hp -= max(0, mordred.power - lancelot.protection)
+    mordred.hp -= max(0, lancelot.power - mordred.protection)
 
     # check if someone fell in battle
     if lancelot.hp <= 0:
@@ -108,8 +108,8 @@ def battle(knights_config: dict) -> dict:
         mordred.hp = 0
 
     # 2 Arthur vs Red Knight:
-    arthur.hp -= red_knight.power - arthur.protection
-    red_knight.hp -= arthur.power - red_knight.protection
+    arthur.hp -= max(0, red_knight.power - arthur.protection)
+    red_knight.hp -= max(0, arthur.power - red_knight.protection)
 
     # check if someone fell in battle
     if arthur.hp <= 0:
